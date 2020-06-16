@@ -2,7 +2,7 @@
 
 @section('content')
 
-if (count($errors) > 0)
+@if (count($errors) > 0)
         <ul class="alert alert-danger" role="alert">
             @foreach ($errors->all() as $error)
                 <li class="ml-4">{{ $error }}</li>
@@ -18,7 +18,7 @@ if (count($errors) > 0)
             {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put']) !!}
 
                 <div class="form-group">
-                    {!! Form::label('status', 'タスク:') !!}
+                    {!! Form::label('status', 'ステータス:') !!}
                     {!! Form::text('status', null, ['class' => 'form-control']) !!}
                 </div>
                 
