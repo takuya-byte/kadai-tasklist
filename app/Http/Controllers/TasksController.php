@@ -10,11 +10,16 @@ class TasksController extends Controller
     
     public function index()
     {
-        $tasks =Task::all();
+         if (\Auth::check()) { // 認証済みの場合
+            // 認証済みユーザを取得
+         $user = \Auth::user();
+         $tasks = $user->tasks()->get();
         
         return view('tasks.index',[
             'tasks'=>$tasks,
             ]);
+    }
+    return view('welcome');
     }
 
     /**

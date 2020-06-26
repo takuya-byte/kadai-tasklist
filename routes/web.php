@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TasksController@index');    // 上書き
+
 Route::group(['middleware' => ['auth']],function(){
     Route::resource('tasks','TasksController');
 });
