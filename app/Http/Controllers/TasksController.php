@@ -59,7 +59,7 @@ class TasksController extends Controller
         $task->content =$request->content;
         $task->save();
         
-        return redirect('/');
+        return back();
     }
     
     public function show($id)
@@ -102,8 +102,8 @@ class TasksController extends Controller
         $task->content = $request->content;
         $task->save();
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+        // 前のURLへリダイレクトさせる
+        return back();
     }
 
     
@@ -112,7 +112,7 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
         $task->delete();
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+        // 前のURLへリダイレクトさせる
+        return back();
     }
 }
