@@ -64,14 +64,16 @@ class TasksController extends Controller
     
     public function show($id)
     {
-                if (\Auth::check()) { // 認証済みの場合
+    $task = Task::findOrFail($id);
 
-        $task = Task::findOrFail($id);
+    if (\Auth::check()) { // 認証済みの場合
 
-}
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+     return view('tasks.show', [
+            'task' => $task,]);
+    }
+     return back();
+
+        
     }
 
     /**
@@ -83,13 +85,18 @@ class TasksController extends Controller
     public function edit($id)
     {
         
-     if (\Auth::check()) { // 認証済みの場
         $task = Task::findOrFail($id);
-     }
-
+        
+    if (\Auth::id() === $task->user_id) { // 認証済みの場
         return view('tasks.edit', [
             'task' => $task,
         ]);    }
+        
+              return back();
+
+    }
+
+       
 
     
 
@@ -101,7 +108,7 @@ class TasksController extends Controller
             'content' =>'required|max:255',
             
             ]);
-      if (\Auth::check()) { // 認証済みの場合
+
 
             
             
@@ -110,7 +117,7 @@ class TasksController extends Controller
         $task->content = $request->content;
         $task->save();
         
-      }
+      
 
         // 前のURLへリダイレクトさせる
         return back();
