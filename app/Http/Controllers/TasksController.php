@@ -66,8 +66,7 @@ class TasksController extends Controller
     {
     $task = Task::findOrFail($id);
 
-    if (\Auth::check()) { // 認証済みの場合
-
+if (\Auth::id() === $task->user_id) {
      return view('tasks.show', [
             'task' => $task,]);
     }
